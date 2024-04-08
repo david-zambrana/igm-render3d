@@ -73,7 +73,7 @@ int main() {
 
   // Cargar igamen textura
   int tex_width, tex_height, tex_channels;
-  unsigned char *tex_data = stbi_load("texture.jpg", &tex_width, &tex_height, &tex_channels, 0);
+  unsigned char *tex_data = stbi_load("alonso.jpg", &tex_width, &tex_height, &tex_channels, 0);
   if (!tex_data) {
       fprintf(stderr, "ERROR: could not load texture image\n");
       glfwTerminate();
@@ -99,7 +99,6 @@ int main() {
     "#version 130\n"
 
     "in vec4 v_pos;"
-
     "out vec4 vs_color;"
 
     // Añadir coordenadas textura
@@ -111,9 +110,9 @@ int main() {
 
     "void main() {"
     "  gl_Position = proj_matrix * mv_matrix * v_pos;"
-    "  vs_color = v_pos * 2.0 + vec4(0.4, 0.4, 0.4, 0.0);"
     // Pasar las coordenadas textura
     "  texcoord = v_texcoord;"
+    "  vs_color = v_pos * 2.0 + vec4(0.4, 0.4, 0.4, 0.0);"
     "}";
 
   // Fragment Shader
@@ -121,16 +120,19 @@ int main() {
     "#version 130\n"
 
     "out vec4 frag_col;"
-
     "in vec4 vs_color;"
 
     // Recibir coordenadas texturas
     "in vec2 texcoord;"
     "uniform sampler2D tex;"
 
-
     "void main() {"
-        "  frag_col = texture(tex, texcoord);" // Usar la funcion de textura con el sampler
+    "  vec2 aux_textcoord = texcoord;"
+    "  if (texcoord.x >= 0.0 && texcoord.x <= 1.0 && texcoord.y >= 0.0 && texcoord.y <= 1.0) {"
+    "    frag_col = texture(tex, texcoord);" // Usar la funcion de textura con el sampler
+    "  } else {"
+    "    frag_col = vs_color;"
+    "  }"
     "}";
 
   // Shaders compilation
