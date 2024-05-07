@@ -3,6 +3,8 @@
 #include <osg/Geode>
 #include <osgGA/TrackballManipulator>
 #include <osg/MatrixTransform>
+#include <osg/Light>
+#include <osg/LightSource>
 
 osg::Geometry* createCube(float size) {
 
@@ -36,14 +38,13 @@ osg::Geometry* createCube(float size) {
 osg::MatrixTransform* createCubeTransform(float size, const osg::Vec3& axis, const osg::Vec3& position) {
 
     // Geometría del cubo
-    osg::ref_ptr<osg::Geometry> cubeGeometry = createCube(size);
-    osg::ref_ptr<osg::Geode> geode = new osg::Geode;
-    geode->addDrawable(cubeGeometry.get());
+    osg::ref_ptr<osg::MatrixTransform> transform = new osg::MatrixTransform;
+    transform->setMatrix(osg::Matrix::rotate(0.0, axis) * osg::Matrix::translate(position));
 
     // Posición y rotación del cubo
-    osg::ref_ptr<osg::MatrixTransform> transform = new osg::MatrixTransform;
+    osg::ref_ptr<osg::Geode> geode = new osg::Geode;
+    geode->addDrawable(createCube(size));
     transform->addChild(geode.get());
-    transform->setMatrix(osg::Matrix::rotate(0.0, axis) * osg::Matrix::translate(position));
 
     return transform.release();
 }
@@ -60,6 +61,21 @@ int main() {
     osg::ref_ptr<osg::MatrixTransform> cube2 = createCubeTransform(1.0f, osg::Vec3(1.0, 0.0, 1.0), osg::Vec3(2.0, 0.0, 0.0));
     root->addChild(cube2.get());
 
+    // Cubo de luz
+    osg::ref_ptr<osg::MatrixTransform> lightCube = createCubeTransform(0.2f, osg::Vec3(), osg::Vec3(0.0, 0.0, 5.0));
+    root->addChild(lightCube.get());
+
+    osg::ref_ptr<osg::Light> light = new osg::Light;
+    light->setLightNum(0);
+    light->setPosition(osg::Vec4(0.0, 0.0, 0.0, 1.0));
+    light->setAmbient(osg::Vec4(0.2, 0.2, 0.2, 1.0));
+    light->setDiffuse(osg::Vec4(1.0, 1.0, 1.0, 1.0));
+    light->setSpecular(osg::Vec4(1.0, 1.0, 1.0, 1.0));
+
+    osg::ref_ptr<osg::LightSource> lightSource = new osg::LightSource;
+    lightSource->setLight(light.get());
+    lightCube->addChild(lightSource.get());
+
     // Visor OSG
     osgViewer::Viewer viewer;
     viewer.setCameraManipulator(new osgGA::TrackballManipulator);
@@ -68,11 +84,10 @@ int main() {
     while (!viewer.done()) {
         double time = viewer.elapsedTime();
         osg::Matrix rotationMatrix;
-
         rotationMatrix.makeRotate(time * 0.5, osg::Vec3(0.0, 1.0, 1.0));
 
-        cube1->setMatrix(rotationMatrix * osg::Matrix::translate(0.0, 0.0, 0.0));
-        cube2->setMatrix(rotationMatrix * osg::Matrix::translate(5.0, 0.0, 0.0));
+        cube1->setMatrix(osg::Matrix::rotate(time * 0.5, osg::Vec3(0.0, 1.0, 1.0)) * osg::Matrix::translate(-2.0, 0.0, 0.0));
+        cube2->setMatrix(osg::Matrix::rotate(time * 0.5, osg::Vec3(1.0, 0.0, 1.0)) * osg::Matrix::translate(2.0, 0.0, 0.0));
 
         viewer.frame();
     }
