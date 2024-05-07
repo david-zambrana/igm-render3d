@@ -1,6 +1,8 @@
 #include <osgViewer/Viewer>
 #include <osg/Geometry>
 #include <osg/Geode>
+#include <osg/Texture2D>
+#include <osgDB/ReadFile>
 #include <osgGA/TrackballManipulator>
 #include <osg/MatrixTransform>
 #include <osg/Light>
@@ -32,10 +34,24 @@ osg::Geometry* createCube(float size) {
     faces->push_back(0); faces->push_back(3); faces->push_back(7); faces->push_back(4); // Left
 
     geom->addPrimitiveSet(faces.get());
+
+    // Textura
+    osg::ref_ptr<osg::Vec2Array> texcoords = new osg::Vec2Array(24);
+    (*texcoords)[0].set(0.0f, 1.0f); (*texcoords)[1].set(1.0f, 1.0f); (*texcoords)[2].set(1.0f, 0.0f); (*texcoords)[3].set(0.0f, 0.0f); // Front
+    (*texcoords)[4].set(1.0f, 1.0f); (*texcoords)[5].set(0.0f, 1.0f); (*texcoords)[6].set(0.0f, 0.0f); (*texcoords)[7].set(1.0f, 0.0f); // Back
+    (*texcoords)[8].set(1.0f, 1.0f); (*texcoords)[9].set(0.0f, 1.0f); (*texcoords)[10].set(0.0f, 0.0f); (*texcoords)[11].set(1.0f, 1.0f); // Bottom
+    (*texcoords)[12].set(1.0f, 1.0f); (*texcoords)[13].set(0.0f, 1.0f); (*texcoords)[14].set(0.0f, 0.0f); (*texcoords)[15].set(1.0f, 0.0f); // Top
+    (*texcoords)[16].set(1.0f, 1.0f); (*texcoords)[17].set(1.0f, 1.0f); (*texcoords)[18].set(1.0f, 0.0f); (*texcoords)[19].set(0.0f, 0.0f); // Right
+    (*texcoords)[20].set(1.0f, 1.0f); (*texcoords)[21].set(0.0f, 1.0f); (*texcoords)[22].set(0.0f, 0.0f); (*texcoords)[23].set(1.0f, 0.0f); // Left
+
+
+
+    geom->setTexCoordArray(0, texcoords.get());
+
     return geom.release();
 }
 
-osg::MatrixTransform* createCubeTransform(float size, const osg::Vec3& axis, const osg::Vec3& position) {
+osg::MatrixTransform* createCubeTransform(float size, const osg::Vec3& axis, const osg::Vec3& position, osg::Image* image) {
 
     // Geometría del cubo
     osg::ref_ptr<osg::MatrixTransform> transform = new osg::MatrixTransform;
@@ -43,9 +59,20 @@ osg::MatrixTransform* createCubeTransform(float size, const osg::Vec3& axis, con
 
     // Posición y rotación del cubo
     osg::ref_ptr<osg::Geode> geode = new osg::Geode;
-    geode->addDrawable(createCube(size));
-    transform->addChild(geode.get());
+    osg::ref_ptr<osg::Geometry> geom = createCube(size);
+    geode->addDrawable(geom.get());
 
+    // Textura
+    if (image) {
+        osg::ref_ptr<osg::Texture2D> texture = new osg::Texture2D;
+        texture->setImage(image);
+
+        osg::ref_ptr<osg::StateSet> stateSet = geode->getOrCreateStateSet();
+        stateSet->setTextureAttributeAndModes(0, texture.get(), osg::StateAttribute::ON);
+        stateSet->setMode(GL_LIGHTING, osg::StateAttribute::OFF);
+    }
+
+    transform->addChild(geode.get());
     return transform.release();
 }
 
@@ -53,16 +80,20 @@ int main() {
     // Nodo raíz
     osg::ref_ptr<osg::Group> root = new osg::Group;
 
+    // Cargar textura
+    osg::Image* textureImage = osgDB::readImageFile("texture.jpg");
+
     // Primer cubo
-    osg::ref_ptr<osg::MatrixTransform> cube1 = createCubeTransform(1.0f, osg::Vec3(0.0, 1.0, 1.0), osg::Vec3(-2.0, 0.0, 0.0));
+    osg::ref_ptr<osg::MatrixTransform> cube1 = createCubeTransform(1.0f, osg::Vec3(0.0, 1.0, 1.0), osg::Vec3(-2.0, 0.0, 0.0), textureImage);
     root->addChild(cube1.get());
 
+
     // Segundo cubo
-    osg::ref_ptr<osg::MatrixTransform> cube2 = createCubeTransform(1.0f, osg::Vec3(1.0, 0.0, 1.0), osg::Vec3(2.0, 0.0, 0.0));
+    osg::ref_ptr<osg::MatrixTransform> cube2 = createCubeTransform(1.0f, osg::Vec3(1.0, 0.0, 1.0), osg::Vec3(2.0, 0.0, 0.0), textureImage);
     root->addChild(cube2.get());
 
     // Cubo de luz
-    osg::ref_ptr<osg::MatrixTransform> lightCube = createCubeTransform(0.2f, osg::Vec3(), osg::Vec3(0.0, 0.0, 5.0));
+    osg::ref_ptr<osg::MatrixTransform> lightCube = createCubeTransform(0.2f, osg::Vec3(), osg::Vec3(0.0, 0.0, 5.0), nullptr);
     root->addChild(lightCube.get());
 
     osg::ref_ptr<osg::Light> light = new osg::Light;
