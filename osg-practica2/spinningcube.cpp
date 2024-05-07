@@ -33,33 +33,47 @@ osg::Geometry* createCube(float size) {
     return geom.release();
 }
 
-int main() {
+osg::MatrixTransform* createCubeTransform(float size, const osg::Vec3& axis, const osg::Vec3& position) {
+
     // Geometría del cubo
-    osg::ref_ptr<osg::Geometry> cubeGeometry = createCube(1.0f);
+    osg::ref_ptr<osg::Geometry> cubeGeometry = createCube(size);
     osg::ref_ptr<osg::Geode> geode = new osg::Geode;
     geode->addDrawable(cubeGeometry.get());
 
     // Posición y rotación del cubo
     osg::ref_ptr<osg::MatrixTransform> transform = new osg::MatrixTransform;
     transform->addChild(geode.get());
+    transform->setMatrix(osg::Matrix::rotate(0.0, axis) * osg::Matrix::translate(position));
 
+    return transform.release();
+}
+
+int main() {
     // Nodo raíz
     osg::ref_ptr<osg::Group> root = new osg::Group;
-    root->addChild(transform.get());
+
+    // Primer cubo
+    osg::ref_ptr<osg::MatrixTransform> cube1 = createCubeTransform(1.0f, osg::Vec3(0.0, 1.0, 1.0), osg::Vec3(-2.0, 0.0, 0.0));
+    root->addChild(cube1.get());
+
+    // Segundo cubo
+    osg::ref_ptr<osg::MatrixTransform> cube2 = createCubeTransform(1.0f, osg::Vec3(1.0, 0.0, 1.0), osg::Vec3(2.0, 0.0, 0.0));
+    root->addChild(cube2.get());
 
     // Visor OSG
     osgViewer::Viewer viewer;
     viewer.setCameraManipulator(new osgGA::TrackballManipulator);
-
-    // Renderizar escena
     viewer.setSceneData(root.get());
 
-    // Rotar el cubo
     while (!viewer.done()) {
         double time = viewer.elapsedTime();
         osg::Matrix rotationMatrix;
+
         rotationMatrix.makeRotate(time * 0.5, osg::Vec3(0.0, 1.0, 1.0));
-        transform->setMatrix(rotationMatrix);
+
+        cube1->setMatrix(rotationMatrix * osg::Matrix::translate(0.0, 0.0, 0.0));
+        cube2->setMatrix(rotationMatrix * osg::Matrix::translate(5.0, 0.0, 0.0));
+
         viewer.frame();
     }
 
