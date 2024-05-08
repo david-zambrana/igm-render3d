@@ -1,0 +1,147 @@
+#Ascii Scene 
+#Version 161 
+#Generator OpenSceneGraph 3.6.5 
+
+osg::Group {
+  UniqueID 1 
+  Children 2 {
+    osg::MatrixTransform {
+      UniqueID 2 
+      Children 1 {
+        osg::Geode {
+          UniqueID 3 
+          Drawables 1 {
+            osg::Geometry {
+              UniqueID 4 
+              DataVariance STATIC 
+              PrimitiveSetList 1 {
+                osg::DrawElementsUInt {
+                  UniqueID 5 
+                  BufferObject TRUE {
+                    osg::ElementBufferObject {
+                      UniqueID 6 
+                      Target 34963 
+                    }
+                  }
+                  Mode QUADS 
+                  vector 48 {
+                    0 0 0 0 
+                    0 0 0 0 
+                    0 0 0 0 
+                    0 0 0 0 
+                    0 0 0 0 
+                    0 0 0 0 
+                    0 1 2 3 
+                    7 6 5 4 
+                    0 4 5 1 
+                    3 2 6 7 
+                    1 5 6 2 
+                    0 3 7 4 
+                    
+                  }
+                }
+              }
+              VertexArray TRUE {
+                osg::Vec3Array {
+                  UniqueID 7 
+                  BufferObject TRUE {
+                    osg::VertexBufferObject {
+                      UniqueID 8 
+                    }
+                  }
+                  Binding BIND_PER_VERTEX 
+                  vector 8 {
+                    -1 -1 -1 
+                    1 -1 -1 
+                    1 1 -1 
+                    -1 1 -1 
+                    -1 -1 1 
+                    1 -1 1 
+                    1 1 1 
+                    -1 1 1 
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      Matrix {
+        0.41181 0.644365 -0.644365 0 
+        -0.644365 0.705905 0.294095 0 
+        0.644365 0.294095 0.705905 0 
+        0 0 0 1 
+      }
+      
+    }
+    osg::MatrixTransform {
+      UniqueID 9 
+      Children 1 {
+        osg::Geode {
+          UniqueID 10 
+          Drawables 1 {
+            osg::Geometry {
+              UniqueID 11 
+              DataVariance STATIC 
+              PrimitiveSetList 1 {
+                osg::DrawElementsUInt {
+                  UniqueID 12 
+                  BufferObject TRUE {
+                    osg::ElementBufferObject {
+                      UniqueID 13 
+                      Target 34963 
+                    }
+                  }
+                  Mode QUADS 
+                  vector 48 {
+                    0 0 0 0 
+                    0 0 0 0 
+                    0 0 0 0 
+                    0 0 0 0 
+                    0 0 0 0 
+                    0 0 0 0 
+                    0 1 2 3 
+                    7 6 5 4 
+                    0 4 5 1 
+                    3 2 6 7 
+                    1 5 6 2 
+                    0 3 7 4 
+                    
+                  }
+                }
+              }
+              VertexArray TRUE {
+                osg::Vec3Array {
+                  UniqueID 14 
+                  BufferObject TRUE {
+                    osg::VertexBufferObject {
+                      UniqueID 15 
+                    }
+                  }
+                  Binding BIND_PER_VERTEX 
+                  vector 8 {
+                    -1 -1 -1 
+                    1 -1 -1 
+                    1 1 -1 
+                    -1 1 -1 
+                    -1 -1 1 
+                    1 -1 1 
+                    1 1 1 
+                    -1 1 1 
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      Matrix {
+        0.41181 0.644365 -0.644365 0 
+        -0.644365 0.705905 0.294095 0 
+        0.644365 0.294095 0.705905 0 
+        5 0 0 1 
+      }
+      
+    }
+  }
+}

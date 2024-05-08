@@ -1,0 +1,16 @@
+digraph osg_scenegraph { rankdir = LR;
+bgcolor=transparent;
+0[shape="record" ,label="<top> Group" ,style="solid, filled" ,color="yellow" ,fillColor="black"]
+1[shape="record" ,label="<top> MatrixTransform" ,style="solid, filled" ,color="yellow" ,fillColor="black"]
+2[shape="record" ,label="<top> Geode" ,style="solid, filled" ,color="yellow" ,fillColor="black"]
+3[shape="record" ,label="<top> Geometry" ,style="solid, filled" ,color="lightblue" ,fillColor="black"]
+4[shape="record" ,label="<top> MatrixTransform" ,style="solid, filled" ,color="yellow" ,fillColor="black"]
+5[shape="record" ,label="<top> Geode" ,style="solid, filled" ,color="yellow" ,fillColor="black"]
+6[shape="record" ,label="<top> Geometry" ,style="solid, filled" ,color="lightblue" ,fillColor="black"]
+2:top -> 3:top [style=""];
+1:top -> 2:top [style=""];
+5:top -> 6:top [style=""];
+4:top -> 5:top [style=""];
+0:top -> 1:top [style=""];
+0:top -> 4:top [style=""];
+}

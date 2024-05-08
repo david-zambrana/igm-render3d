@@ -1,0 +1,239 @@
+#Ascii Scene 
+#Version 161 
+#Generator OpenSceneGraph 3.6.5 
+
+osg::Group {
+  UniqueID 1 
+  Children 3 {
+    osg::MatrixTransform {
+      UniqueID 2 
+      Children 1 {
+        osg::Geode {
+          UniqueID 3 
+          Drawables 1 {
+            osg::Geometry {
+              UniqueID 4 
+              DataVariance STATIC 
+              PrimitiveSetList 1 {
+                osg::DrawElementsUInt {
+                  UniqueID 5 
+                  BufferObject TRUE {
+                    osg::ElementBufferObject {
+                      UniqueID 6 
+                      Target 34963 
+                    }
+                  }
+                  Mode QUADS 
+                  vector 48 {
+                    0 0 0 0 
+                    0 0 0 0 
+                    0 0 0 0 
+                    0 0 0 0 
+                    0 0 0 0 
+                    0 0 0 0 
+                    0 1 2 3 
+                    7 6 5 4 
+                    0 4 5 1 
+                    3 2 6 7 
+                    1 5 6 2 
+                    0 3 7 4 
+                    
+                  }
+                }
+              }
+              VertexArray TRUE {
+                osg::Vec3Array {
+                  UniqueID 7 
+                  BufferObject TRUE {
+                    osg::VertexBufferObject {
+                      UniqueID 8 
+                    }
+                  }
+                  Binding BIND_PER_VERTEX 
+                  vector 8 {
+                    -1 -1 -1 
+                    1 -1 -1 
+                    1 1 -1 
+                    -1 1 -1 
+                    -1 -1 1 
+                    1 -1 1 
+                    1 1 1 
+                    -1 1 1 
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      Matrix {
+        -0.127433 0.701342 -0.701342 0 
+        -0.701342 0.436283 0.563717 0 
+        0.701342 0.563717 0.436283 0 
+        -2 0 0 1 
+      }
+      
+    }
+    osg::MatrixTransform {
+      UniqueID 9 
+      Children 1 {
+        osg::Geode {
+          UniqueID 10 
+          Drawables 1 {
+            osg::Geometry {
+              UniqueID 11 
+              DataVariance STATIC 
+              PrimitiveSetList 1 {
+                osg::DrawElementsUInt {
+                  UniqueID 12 
+                  BufferObject TRUE {
+                    osg::ElementBufferObject {
+                      UniqueID 13 
+                      Target 34963 
+                    }
+                  }
+                  Mode QUADS 
+                  vector 48 {
+                    0 0 0 0 
+                    0 0 0 0 
+                    0 0 0 0 
+                    0 0 0 0 
+                    0 0 0 0 
+                    0 0 0 0 
+                    0 1 2 3 
+                    7 6 5 4 
+                    0 4 5 1 
+                    3 2 6 7 
+                    1 5 6 2 
+                    0 3 7 4 
+                    
+                  }
+                }
+              }
+              VertexArray TRUE {
+                osg::Vec3Array {
+                  UniqueID 14 
+                  BufferObject TRUE {
+                    osg::VertexBufferObject {
+                      UniqueID 15 
+                    }
+                  }
+                  Binding BIND_PER_VERTEX 
+                  vector 8 {
+                    -1 -1 -1 
+                    1 -1 -1 
+                    1 1 -1 
+                    -1 1 -1 
+                    -1 -1 1 
+                    1 -1 1 
+                    1 1 1 
+                    -1 1 1 
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      Matrix {
+        0.436283 0.701342 0.563717 0 
+        -0.701342 -0.127433 0.701342 0 
+        0.563717 -0.701342 0.436283 0 
+        2 0 0 1 
+      }
+      
+    }
+    osg::MatrixTransform {
+      UniqueID 16 
+      Children 2 {
+        osg::Geode {
+          UniqueID 17 
+          Drawables 1 {
+            osg::Geometry {
+              UniqueID 18 
+              DataVariance STATIC 
+              PrimitiveSetList 1 {
+                osg::DrawElementsUInt {
+                  UniqueID 19 
+                  BufferObject TRUE {
+                    osg::ElementBufferObject {
+                      UniqueID 20 
+                      Target 34963 
+                    }
+                  }
+                  Mode QUADS 
+                  vector 48 {
+                    0 0 0 0 
+                    0 0 0 0 
+                    0 0 0 0 
+                    0 0 0 0 
+                    0 0 0 0 
+                    0 0 0 0 
+                    0 1 2 3 
+                    7 6 5 4 
+                    0 4 5 1 
+                    3 2 6 7 
+                    1 5 6 2 
+                    0 3 7 4 
+                    
+                  }
+                }
+              }
+              VertexArray TRUE {
+                osg::Vec3Array {
+                  UniqueID 21 
+                  BufferObject TRUE {
+                    osg::VertexBufferObject {
+                      UniqueID 22 
+                    }
+                  }
+                  Binding BIND_PER_VERTEX 
+                  vector 8 {
+                    -0.2 -0.2 -0.2 
+                    0.2 -0.2 -0.2 
+                    0.2 0.2 -0.2 
+                    -0.2 0.2 -0.2 
+                    -0.2 -0.2 0.2 
+                    0.2 -0.2 0.2 
+                    0.2 0.2 0.2 
+                    -0.2 0.2 0.2 
+                  }
+                }
+              }
+            }
+          }
+        }
+        osg::LightSource {
+          UniqueID 23 
+          CullingActive FALSE 
+          StateSet TRUE {
+            osg::StateSet {
+              UniqueID 24 
+              DataVariance STATIC 
+              ModeList 1 {
+                GL_LIGHT0 ON 
+              }
+            }
+          }
+          Light TRUE {
+            osg::Light {
+              UniqueID 25 
+              Ambient 0.2 0.2 0.2 1 
+              Diffuse 1 1 1 1 
+              Specular 1 1 1 1 
+              Position 0 0 0 1 
+              Direction 0 0 -1 
+            }
+          }
+        }
+      }
+      Matrix {
+        1 0 0 0 
+        0 1 0 0 
+        0 0 1 0 
+        0 0 5 1 
+      }
+      
+    }
+  }
+}
