@@ -7,6 +7,7 @@
 #include <osg/MatrixTransform>
 #include <osg/Light>
 #include <osg/LightSource>
+#include <osgDB/WriteFile>
 
 osg::Geometry* createCube(float size) {
 
@@ -132,6 +133,9 @@ int main() {
 
         viewer.frame();
     }
+
+    // Grafo de la escena
+    osgDB::writeNodeFile(*root, "grafo_ej4.osgt");
 
     return 0;
 }
